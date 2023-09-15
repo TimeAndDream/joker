@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>四个小丑的自我介绍</title>
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+</head>
+<body>
+    <div class="container">
+    	<ul class="head">
+    		<li>茹姐</li>
+    		<li>妍姐</li>
+    		<li>体院小丑</li>
+    		<li>计院学子</li>
+    	</ul>
+    	<div class="slideshow-container">
+    		<div class="slideshow">
+				<img src="images/1.jpg" alt="图片1" class="image"/> <!-- 使用相对路径 -->
+				<img src="images/2.jpg" alt="图片2" class="image"/>
+				<br>我是外院圆脸小美女————李婉茹
+			</div>
+			<div class="slideshow-container">
+				 <!-- 使用相对路径 -->
+				<img src="images/3.jpg" alt="图片3" class="image"/>
+				<img src="images/4.jpg" alt="图片4" class="image"/>
+				<br>我是外院大美女————鲁乐妍
+			</div>
+			<div class="slideshow-container">
+				<img src="images/5.jpg" alt="图片5" class="image"/> <!-- 使用相对路径 -->
+
+				<br>我是体院超级小丑————周日天天
+			</div>
+			<div class="slideshow-container">
+				<img src="images/6.jpg" alt="图片6" width="960"/> <!-- 使用相对路径 -->
+				<br>我是计院学子————cp
+			</div>
+    	</div>
+    </div>
+    
+    <script>
+    
+    $(function(){
+    	 //tab的初始化
+    	$(".head li").removeClass('active').eq(0).addClass('active');
+    	$(".content div").hide().eq(0).show();
+    	
+    	
+    	$(".head li").on('click', function(){
+            // index是点击的li的索引
+    		var index = $(this).index();
+    		//-----------begin-----------
+            $(".head li").removeClass("active").eq(index).addClass("active");
+            $(".content div").hide().eq(index).show();
+            //------------end------------  
+    	})
+
+
+		function startSlideshow(container) {
+        var $slideshowContainer = container.find('.slideshow-container');
+        var $images = $slideshowContainer.find('.image');
+        var currentIndex = 0;
+
+        // 隐藏所有图片，显示第一张
+        $images.hide().eq(currentIndex).show();
+
+        // 设置定时器，每隔一定时间切换图片
+        setInterval(function() {
+            // 隐藏当前图片
+            $images.eq(currentIndex).hide();
+
+            // 计算下一张图片的索引
+            currentIndex = (currentIndex + 1) % $images.length;
+
+            // 显示下一张图片
+            $images.eq(currentIndex).show();
+        }, 3000); // 3000毫秒（3秒）切换一次图片
+    }
+
+    // 初始化轮播
+    $(".head li").each(function(index) {
+        var $container = $(".content div").eq(index);
+        startSlideshow($container);
+    });
+
+    	
+    })
+    
+        
+    
+    </script>
+    
+    <style>
+    	.container{
+    		width: 1000px;
+    		margin: 40px auto;
+    	}
+    	ul,li{
+    	  list-style-type: none;
+    	}
+    	.container ul{
+    		overflow: hidden;
+    		background: #000;
+    		color: #fff;
+    	}
+    	.container li{
+    		width: 200px;
+    		float: left;
+    		text-align: center;
+    		line-height: 60px;
+    		font-size: 20px;
+    		cursor: pointer;
+    	}
+    	.container li.active{
+    		color: orange;
+    	}
+    	
+    	.container .content{
+    		width: 960px;
+    		height: auto;
+    		padding: 20px;
+    		background: #ccc;
+    		font-size: 18px;
+    	}
+		.container .content .image {
+        	width: 450px;
+    		margin: 40px auto;
+    	}
+    </style>
+</body>
+</html>
